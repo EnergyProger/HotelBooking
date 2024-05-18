@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { check, validationResult } from "express-validator";
-import { PASSWORD_LENGTH } from "../common/constants";
+import { MIN_PASSWORD_LENGTH } from "../common/constants";
 import User from "../models/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -15,9 +15,9 @@ router.post(
     check("email", "Email is required").isEmail(),
     check(
       "password",
-      `Password with ${PASSWORD_LENGTH} or more characters required`
+      `Password with ${MIN_PASSWORD_LENGTH} or more characters required`
     ).isLength({
-      min: PASSWORD_LENGTH,
+      min: MIN_PASSWORD_LENGTH,
     }),
   ],
   async (request: Request, response: Response) => {
@@ -51,7 +51,7 @@ router.post(
         maxAge: 86400000,
       });
 
-      return response.sendStatus(200);
+      return response.status(200).send({ message: "User registered OK" });
     } catch (error) {
       console.log(error);
       response.status(500).send({ message: "Something went wrong" });
@@ -65,9 +65,9 @@ router.post(
     check("email", "Email is required").isEmail(),
     check(
       "password",
-      `Password with ${PASSWORD_LENGTH} or more characters required`
+      `Password with ${MIN_PASSWORD_LENGTH} or more characters required`
     ).isLength({
-      min: PASSWORD_LENGTH,
+      min: MIN_PASSWORD_LENGTH,
     }),
   ],
   async (request: Request, response: Response) => {
