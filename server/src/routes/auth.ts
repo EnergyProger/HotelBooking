@@ -4,6 +4,7 @@ import { MIN_PASSWORD_LENGTH } from "../common/constants";
 import User from "../models/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import verifyToken from "../middleware/auth";
 
 const router = express.Router();
 
@@ -109,5 +110,21 @@ router.post(
     }
   }
 );
+
+router.get(
+  "/validate-token",
+  verifyToken,
+  (request: Request, response: Response) => {
+    response.status(200).send({ userId: request.userId });
+  }
+);
+
+router.post("/logout", (request: Request, response: Response) => {
+  response.cookie("auth_token", "", {
+    expires: new Date(0),
+  });
+
+  response.send();
+});
 
 export default router;
