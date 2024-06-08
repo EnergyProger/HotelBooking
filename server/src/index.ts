@@ -4,6 +4,7 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth";
+import path from "path";
 
 mongoose.connect(process.env.MONGODB_CONNECTION as string);
 
@@ -17,6 +18,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(express.static(path.join(__dirname, "../../client/dist")));
 
 app.use("/api/auth", authRoutes);
 
