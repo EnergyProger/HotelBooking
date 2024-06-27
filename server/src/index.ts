@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
@@ -30,6 +30,10 @@ app.use(express.static(path.join(__dirname, "../../client/dist")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/my-hotels", myHotelsRoutes);
+
+app.get("*", (request: Request, response: Response) => {
+  response.sendFile(path.join(__dirname, "../../client/dist/index.html"));
+});
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log(`The server runs on port ${process.env.SERVER_PORT}`);
