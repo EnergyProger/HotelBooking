@@ -2,9 +2,10 @@ import express, { Request, Response } from "express";
 import multer from "multer";
 import cloudinary from "cloudinary";
 import { FILE_SIZE_LIMIT, NUMBER_FILES_LIMIT } from "../common/constants";
-import Hotel, { HotelType } from "../models/hotel";
+import Hotel from "../models/hotel";
 import verifyToken from "../middleware/auth";
 import { body } from "express-validator";
+import { HotelType } from "../shared/types";
 
 const router = express.Router();
 
@@ -63,5 +64,15 @@ router.post(
     }
   }
 );
+
+router.get("/", verifyToken, async (request: Request, response: Response) => {
+  try {
+    const hotels = await Hotel.find({ userId: request.userId });
+    response.json(hotels);
+  } catch (error) {
+    console.log("Error fetching hotels", error);
+    response.status(500).json({ message: "Error fetching hotels" });
+  }
+});
 
 export default router;
