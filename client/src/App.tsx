@@ -4,15 +4,15 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { useAppContext } from "./contexts/AppContext";
 import Layout from "./layouts/Layout";
 import Register from "./pages/Register";
 import SignIn from "./pages/SignIn";
 import AddHotel from "./pages/AddHotel";
-import { useAppContext } from "./contexts/AppContext";
 import MyHotels from "./pages/MyHotels";
 
 const App = () => {
-  const isLoggedIn = useAppContext();
+  const { isLoggedIn } = useAppContext();
   return (
     <Router>
       <Routes>
