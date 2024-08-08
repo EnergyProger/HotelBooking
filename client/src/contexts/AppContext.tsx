@@ -3,15 +3,15 @@ import Toast from "../components/Toast";
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 
-type ToastMessage = {
+interface ToastMessage {
   message: string;
   type: "SUCCESS" | "ERROR";
-};
+}
 
-type AppContext = {
+interface AppContext {
   showToast: (toastMessage: ToastMessage) => void;
   isLoggedIn: boolean;
-};
+}
 
 const AppContext = React.createContext<AppContext | undefined>(undefined);
 

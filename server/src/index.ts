@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth";
 import path from "path";
 import { v2 as cloudinary } from "cloudinary";
 import myHotelsRoutes from "./routes/myHotels";
+import hotelRoutes from "./routes/hotels";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, "../../client/dist")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/my-hotels", myHotelsRoutes);
+app.use("/api/hotels", hotelRoutes);
 
 app.get("*", (request: Request, response: Response) => {
   response.sendFile(path.join(__dirname, "../../client/dist/index.html"));

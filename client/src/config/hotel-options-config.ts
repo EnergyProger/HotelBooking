@@ -1,8 +1,12 @@
-export const hotelStarRating = [1, 2, 3, 4, 5];
-export const minPricePerNight = 1;
 export const minAdultCount = 1;
+export const maxAdultCount = 20;
 export const minChildCount = 0;
+export const maxChildCount = 20;
 export const maxHotelImagesForm = 6;
+export const minPricePerNight = 100;
+export const maxPricePerNightFilter = 20000;
+export const stepPricePerNightFilter = 100;
+export const maxVisibleFacilitiesOnSearch = 3;
 
 export const hotelTypes = [
   "Budget",
@@ -32,3 +36,5 @@ export const hotelFacilities = [
   "Spa",
   "Fitness Center",
 ];
+
+export const hotelStarRating = [5, 4, 3, 2, 1];
