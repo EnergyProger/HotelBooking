@@ -20,8 +20,8 @@ const SearchResultCard: React.FC<Props> = ({ hotel }) => {
         <div>
           <div className="flex items-center">
             <span className="flex">
-              {Array.from({ length: hotel.starRating }).map((star, index) => (
-                <AiFillStar className="fill-yellow-400" key={index}/>
+              {Array.from({ length: hotel.starRating }).map((_, index) => (
+                <AiFillStar className="fill-yellow-400" key={index} />
               ))}
             </span>
             <span className="ml-1 text-sm">{hotel.type}</span>
