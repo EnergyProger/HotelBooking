@@ -118,7 +118,7 @@ const Search = () => {
           <HotelOptionsSort sortOption={sortOption} onChange={setSortOption} />
         </div>
         {hotelData?.data.map((hotel) => (
-          <SearchResultCard hotel={hotel} />
+          <SearchResultCard hotel={hotel} key={hotel._id}/>
         ))}
         {hotelData?.data.length !== 0 && (
           <div>
