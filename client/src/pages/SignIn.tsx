@@ -5,10 +5,10 @@ import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export type SignInFormData = {
+export interface SignInFormData {
   email: string;
   password: string;
-};
+}
 
 const SignIn = () => {
   const { showToast } = useAppContext();

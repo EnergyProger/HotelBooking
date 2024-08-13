@@ -26,12 +26,26 @@ const SearchContext = React.createContext<SearchContext | undefined>(undefined);
 export const SearchContextProvider: React.FC<SearchContextProviderProps> = ({
   children,
 }) => {
-  const [destination, setDestination] = useState<string>("");
-  const [checkIn, setCheckIn] = useState<Date>(new Date());
-  const [checkOut, setCheckOut] = useState<Date>(new Date());
-  const [adultCount, setAdultCount] = useState<number>(minAdultCount);
-  const [childCount, setChildCount] = useState<number>(minChildCount);
-  const [hotelId, setHotelId] = useState<string>("");
+  const [destination, setDestination] = useState<string>(
+    () => sessionStorage.getItem("destination") || ""
+  );
+  const [checkIn, setCheckIn] = useState<Date>(
+    () =>
+      new Date(sessionStorage.getItem("checkIn") || new Date().toISOString())
+  );
+  const [checkOut, setCheckOut] = useState<Date>(
+    () =>
+      new Date(sessionStorage.getItem("checkOut") || new Date().toISOString())
+  );
+  const [adultCount, setAdultCount] = useState<number>(() =>
+    parseInt(sessionStorage.getItem("adultCount") || minAdultCount.toString())
+  );
+  const [childCount, setChildCount] = useState<number>(
+    parseInt(sessionStorage.getItem("childCount") || minChildCount.toString())
+  );
+  const [hotelId, setHotelId] = useState<string>(
+    () => sessionStorage.getItem("hotelId") || ""
+  );
 
   const saveSearchValues = (
     destination: string,
@@ -46,8 +60,16 @@ export const SearchContextProvider: React.FC<SearchContextProviderProps> = ({
     setCheckOut(checkOut);
     setAdultCount(adultCount);
     setChildCount(childCount);
+
+    sessionStorage.setItem("destination", destination);
+    sessionStorage.setItem("checkIn", checkIn.toISOString());
+    sessionStorage.setItem("checkOut", checkOut.toISOString());
+    sessionStorage.setItem("adultCount", adultCount.toString());
+    sessionStorage.setItem("childCount", childCount.toString());
+
     if (hotelId) {
       setHotelId(hotelId);
+      sessionStorage.setItem("hotelId", hotelId);
     }
   };
 

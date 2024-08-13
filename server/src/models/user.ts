@@ -1,14 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import { UserType } from "../shared/types";
 import { PASSWORD_SALT_LENGTH } from "../common/constants";
-
-export type UserType = {
-  _id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-};
 
 const userSchema = new mongoose.Schema<UserType>({
   email: { type: String, required: true, unique: true },

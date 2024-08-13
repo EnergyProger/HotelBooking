@@ -5,13 +5,13 @@ import { useAppContext } from "../contexts/AppContext";
 import { MIN_PASSWORD_LENGTH } from "../common/constants";
 import { useNavigate } from "react-router-dom";
 
-export type RegisterFormData = {
+export interface RegisterFormData {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
-};
+}
 
 const Register = () => {
   const queryClient = useQueryClient();

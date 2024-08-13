@@ -1,6 +1,9 @@
 import { useFormContext } from "react-hook-form";
 import { HotelFormData } from "./ManageHotelForm";
-import { hotelStarRating, minPricePerNight } from "../../config/hotel-options-config";
+import {
+  hotelStarRating,
+  minPricePerNight,
+} from "../../config/hotel-options-config";
 
 const DetailsSection = () => {
   const {
