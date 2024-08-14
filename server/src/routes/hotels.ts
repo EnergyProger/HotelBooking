@@ -166,14 +166,13 @@ router.post(
         { _id: request.params.hotelId },
         {
           $push: { bookings: newBooking },
-        }
+        },
+        { new: true }
       );
 
       if (!hotel) {
         return response.status(400).json({ message: "Hotel not found" });
       }
-
-      await hotel.save();
 
       response.status(200).send();
     } catch (error) {
