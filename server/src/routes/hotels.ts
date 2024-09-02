@@ -1,6 +1,10 @@
 import express, { Request, Response } from "express";
 import Hotel from "../models/hotel";
-import { PAGE_NUMBER_DEFAULT, PAGE_SIZE } from "../common/constants";
+import {
+  LATEST_UPDATED_HOTELS_SIZE,
+  PAGE_NUMBER_DEFAULT,
+  PAGE_SIZE,
+} from "../common/constants";
 import { BookingType, HotelSearchResponse } from "../shared/types";
 import { param, validationResult } from "express-validator";
 import Stripe from "stripe";
@@ -55,6 +59,19 @@ router.get("/search", async (request: Request, response: Response) => {
   } catch (error) {
     console.log("Error", error);
     response.status(500).json({ message: "Something went wrong" });
+  }
+});
+
+router.get("/", async (request: Request, response: Response) => {
+  try {
+    const hotels = await Hotel.find()
+      .sort("-lastUpdated")
+      .limit(LATEST_UPDATED_HOTELS_SIZE);
+
+    response.json(hotels);
+  } catch (error) {
+    console.log("Error", error);
+    response.status(500).json({ message: "Error fetching hotels" });
   }
 });
 
